@@ -1,0 +1,4 @@
+/my_pg_admin_data
+/my_taxi_postgres_data
+
+*.parquet
