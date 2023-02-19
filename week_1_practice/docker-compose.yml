@@ -18,7 +18,7 @@ services:
       - PGADMIN_DEFAULT_EMAIL=admin@admin.com
       - PGADMIN_DEFAULT_PASSWORD=root
     volumes:
-      - ./my_pg_admin_data:/var/lib/pgadmin
+      - ./my_pg_admin_data/pgadmin:/var/lib/pgadmin
     networks:
       - pgnetwork
     ports:
