@@ -13,4 +13,5 @@ dbt-core
 dbt-bigquery
 dbt-postgres
 pyspark
+tqdm
 confluent-kafka==1.9.2

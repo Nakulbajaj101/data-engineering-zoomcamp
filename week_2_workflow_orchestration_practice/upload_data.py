@@ -5,8 +5,9 @@ import pandas as pd
 import requests
 from sqlalchemy import create_engine
 from tqdm import tqdm
+from prefect import flow, task
 
-
+@task(retries=2, log_prints=True)
 def ingest_data(year: str="", month: str="", url: str=None) -> str:
     """Function to ingest data"""
 
@@ -26,6 +27,7 @@ def ingest_data(year: str="", month: str="", url: str=None) -> str:
 
     return filename
 
+@task(retries=2, log_prints=True)
 def read_data(filepath: str) -> pd.DataFrame:
     """Function to read data"""
 
@@ -37,7 +39,7 @@ def read_data(filepath: str) -> pd.DataFrame:
 
     return df
 
-
+@flow(name="Ingest taxi data Flow")
 def main(params):
     user = params.user
     password = params.password
