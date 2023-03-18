@@ -5,6 +5,7 @@ from tqdm import tqdm
 from prefect import flow, task
 from prefect.tasks import task_input_hash
 from datetime import timedelta
+from prefect_sqlalchemy import SqlAlchemyConnector
 
 @task(retries=2, log_prints=True, cache_key_fn=task_input_hash, cache_expiration=timedelta(days=1))
 def download_data(year: str="", month: str="", url: str=None) -> str:
@@ -52,24 +53,22 @@ def transform_data(data: pd.DataFrame) -> pd.DataFrame:
     return df_filter
 
 
-@task(retries=2, log_prints=True, cache_key_fn=task_input_hash, cache_expiration=timedelta(days=1))
-def ingest_data(df, table_name, user, password, database, port, host):
+@task(retries=2, log_prints=True)
+def ingest_data(df, table_name):
     """Function to ingest data into the postgres"""
 
-    db_url = f"postgresql://{user}:{password}@{host}:{port}/{database}"
-    engine = create_engine(url=db_url)
+    with SqlAlchemyConnector.load("taxi-postgres-connector") as database_block:
+        with database_block.get_connection(begin=False) as engine:
+            df.head(n=0).to_sql(name=table_name, con=engine, if_exists="replace")
+            df.to_sql(name=table_name, con=engine, if_exists="append", chunksize=100000, index=False)
 
-    df.head(n=0).to_sql(name=table_name, con=engine, if_exists="replace")
-    df.to_sql(name=table_name, con=engine, if_exists="append", chunksize=100000, index=False)
+@flow(name="Subflow", log_prints=True)
+def subflow(table_name: str):
+    print(f"This is the subflow test with table name {table_name}")
 
 @flow(name="Ingest taxi data Flow")
-def main():
-    user = "root"
-    password = "root"
-    database = "my_taxi"
-    port = "5432"
-    host = "mytaxidb"
-    table_name = "yellow_taxi_trips"
+def main(table_name: str):
+    table_name = table_name
     url = "http://10.132.0.2:8000/yellow_tripdata_2021-01.parquet"
 
     # Ingest the data
@@ -84,12 +83,9 @@ def main():
     
     # Ingest data
     ingest_data(df=df,
-                table_name=table_name,
-                user=user,
-                password=password,
-                database=database,
-                port=port,
-                host=host)
+                table_name=table_name)
+
+    subflow(table_name=table_name)
 
 if __name__ == "__main__":
-    main()
+    main(table_name="yellow_taxi_trips")
