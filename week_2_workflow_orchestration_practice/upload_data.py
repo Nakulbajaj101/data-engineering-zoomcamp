@@ -1,13 +1,10 @@
-
-import argparse
-
 import pandas as pd
 import requests
 from sqlalchemy import create_engine
 from tqdm import tqdm
 from prefect import flow, task
 from prefect.tasks import task_input_hash
-from datetime import datetime, timedelta
+from datetime import timedelta
 
 @task(retries=2, log_prints=True, cache_key_fn=task_input_hash, cache_expiration=timedelta(days=1))
 def download_data(year: str="", month: str="", url: str=None) -> str:
@@ -50,7 +47,7 @@ def transform_data(data: pd.DataFrame) -> pd.DataFrame:
     df_filter = df[df["passenger_count"] != 0].reset_index(drop=True)
     post_filter_passenger_count = df_filter['passenger_count'].isin([0]).sum()
 
-    print(f"Before filtering 0 count records were {pre_filter_passenger_count} and after filtering were {post_filter_passenger_count}")
+    print(f"Before filtering zero passenger count records were {pre_filter_passenger_count} and after filtering were {post_filter_passenger_count}")
 
     return df_filter
 
@@ -66,17 +63,18 @@ def ingest_data(df, table_name, user, password, database, port, host):
     df.to_sql(name=table_name, con=engine, if_exists="append", chunksize=100000, index=False)
 
 @flow(name="Ingest taxi data Flow")
-def main(params):
-    user = params.user
-    password = params.password
-    database = params.db
-    port = params.port
-    host = params.host
-    url = params.url
+def main():
+    user = "root"
+    password = "root"
+    database = "my_taxi"
+    port = "5432"
+    host = "mytaxidb"
+    table_name = "yellow_taxi_trips"
+    url = "http://10.132.0.2:8000/yellow_tripdata_2021-01.parquet"
 
     # Ingest the data
 
-    filename = download_data(year=params.year, month=params.month, url=url)
+    filename = download_data(year="2021", month="01", url=url)
     
     # Read the data
     df = read_data(filepath=filename)
@@ -86,7 +84,7 @@ def main(params):
     
     # Ingest data
     ingest_data(df=df,
-                table_name=params.table_name,
+                table_name=table_name,
                 user=user,
                 password=password,
                 database=database,
@@ -94,17 +92,4 @@ def main(params):
                 host=host)
 
 if __name__ == "__main__":
-
-    parser = argparse.ArgumentParser(description="Ingest Taxi parquet data")
-    parser.add_argument('--user',)
-    parser.add_argument('--password')
-    parser.add_argument('--port')
-    parser.add_argument('--table_name')
-    parser.add_argument('--db')
-    parser.add_argument('--host')
-    parser.add_argument('--year')
-    parser.add_argument('--month')
-    parser.add_argument('--url', default=None)
-
-    args = parser.parse_args()
-    main(params=args)
+    main()

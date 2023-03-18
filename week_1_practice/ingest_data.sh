@@ -6,7 +6,7 @@ docker run -it \
 taxi_ingest:latest \
     --user=root \
     --password=root \
-    --host=mytaxidb \
+    --host=de-zoomcamp \
     --port=5432 \
     --db=my_taxi \
     --table_name=yellow_taxi_trips \
