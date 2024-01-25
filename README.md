@@ -13,22 +13,24 @@
 
 Syllabus
 
-* [Week 1: Introduction & Prerequisites](#week-1-introduction--prerequisites)
-* [Week 2: Workflow Orchestration](#week-2-workflow-orchestration)
-* [Week 3: Data Warehouse](#week-3-data-warehouse)
-* [Week 4: Analytics Engineering](#week-4-analytics-engineering)
-* [Week 5: Batch processing](#week-5-batch-processing)
-* [Week 6: Streaming](#week-6-streaming)
-* [Week 7, 8 & 9: Project](#week-7-8--9-project)
+* [Module 1: Containerization and Infrastructure as Code](#module-1-containerization-and-infrastructure-as-code)
+* [Module 2: Workflow Orchestration](#module-2-workflow-orchestration)
+* [Workshop 1: Data Ingestion](#workshop-1-data-ingestion)
+* [Module 3: Data Warehouse](#module-3-data-warehouse)
+* [Module 4: Analytics Engineering](#module-4-analytics-engineering)
+* [Module 5: Batch processing](#module-5-batch-processing)
+* [Module 6: Streaming](#module-6-streaming)
+* [Workshop 2: Stream Processing with SQL](#workshop-2-stream-processing-with-sql)
+* [Project](#project)
 
 ## Taking the course
 
-### 2023 Cohort
+### 2024 Cohort
 
-* **Start**: 16 January 2023 (Monday) at 18:00 CET
+* **Start**: 15 January 2024 (Monday) at 17:00 CET
 * **Registration link**: https://airtable.com/shr6oVXeQvSI5HuWD
-* Subscribe to our [public Google Calendar](https://calendar.google.com/calendar/?cid=ZXIxcjA1M3ZlYjJpcXU0dTFmaG02MzVxMG9AZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ) (it works from Desktop only)
-* [Cohort folder](cohorts/2023/) with homeworks and deadlines 
+* [Cohort folder](cohorts/2024/) with homeworks and deadlines 
+
 
 ### Self-paced mode
 
@@ -41,23 +43,13 @@ can take the course at your own pace
 * If you can't find a solution to your problem in FAQ, ask for help in Slack
 
 
-
-### Asking for help in Slack
-
-The best way to get support is to use [DataTalks.Club's Slack](https://datatalks.club/slack.html). Join the [`#course-data-engineering`](https://app.slack.com/client/T01ATQK62F8/C01FABYF2RG) channel.
-
-To make discussions in Slack more organized:
-
-* Follow [these recommendations](asking-questions.md) when asking for help
-* Read the [DataTalks.Club community guidelines](https://datatalks.club/slack/guidelines.html)
-
-
 ## Syllabus
 
-> **Note:** NYC TLC changed the format of the data we use to parquet. But you can still access
-> the csv files [here](https://github.com/DataTalksClub/nyc-tlc-data).
+> **Note:** NYC TLC changed the format of the data we use to parquet.
+> In the course we still use the CSV files accessible [here](https://github.com/DataTalksClub/nyc-tlc-data).
 
-### [Week 1: Introduction & Prerequisites](week_1_basics_n_setup)
+
+### [Module 1: Containerization and Infrastructure as Code](01-docker-terraform/)
 
 * Course overview
 * Introduction to GCP
@@ -67,37 +59,38 @@ To make discussions in Slack more organized:
 * Preparing the environment for the course
 * Homework
 
-[More details](week_1_basics_n_setup)
+[More details](01-docker-terraform/)
 
 
-### [Week 2: Workflow Orchestration](week_2_workflow_orchestration/)
+### [Module 2: Workflow Orchestration](02-workflow-orchestration/)
 
 * Data Lake
 * Workflow orchestration
-* Introduction to Prefect
-* ETL with GCP & Prefect
-* Parametrizing workflows
-* Prefect Cloud and additional resources
+* Workflow orchestration with Mage
 * Homework
 
-[More details](week_2_workflow_orchestration/)
+[More details](02-workflow-orchestration/)
 
 
-### [Week 3: Data Warehouse](week_3_data_warehouse)
+### [Workshop 1: Data Ingestion](cohorts/2024/workshops/dlt.md)
 
+
+[More details](cohorts/2024/workshops/dlt.md)
+
+
+### [Module 3: Data Warehouse](03-data-warehouse/)
 
 * Data Warehouse
 * BigQuery
 * Partitioning and clustering
 * BigQuery best practices
 * Internals of BigQuery
-* Integrating BigQuery with Airflow
 * BigQuery Machine Learning
 
-[More details](week_3_data_warehouse)
+[More details](03-data-warehouse/)
 
 
-### [Week 4: Analytics engineering](week_4_analytics_engineering/)
+### [Module 4: Analytics engineering](04-analytics-engineering/)
 
 * Basics of analytics engineering
 * dbt (data build tool)
@@ -109,10 +102,10 @@ To make discussions in Slack more organized:
 * Visualizing the data with google data studio and metabase
 
 
-[More details](week_4_analytics_engineering)
+[More details](04-analytics-engineering/)
 
 
-### [Week 5: Batch processing](week_5_batch_processing)
+### [Module 5: Batch processing](05-batch/)
 
 * Batch processing
 * What is Spark
@@ -120,49 +113,37 @@ To make discussions in Slack more organized:
 * Spark SQL
 * Internals: GroupBy and joins
 
-[More details](week_5_batch_processing)
+[More details](05-batch/)
 
-### [Week 6: Streaming](week_6_stream_processing)
+### [Module 6: Streaming](06-streaming/)
 
 * Introduction to Kafka
 * Schemas (avro)
 * Kafka Streams
 * Kafka Connect and KSQL
 
-[More details](week_6_stream_processing)
+[More details](06-streaming/)
 
 
-### [Week 7, 8 & 9: Project](week_7_project)
+### [Workshop 2: Stream Processing with SQL](cohorts/2024/workshops/rising-wave.md)
+
+
+[More details](cohorts/2024/workshops/rising-wave.md)
+
+
+### [Project](projects)
 
 Putting everything we learned to practice
 
-* Week 7 and 8: working on your project
-* Week 9: reviewing your peers
+* Week 1 and 2: working on your project
+* Week 3: reviewing your peers
 
-[More details](week_7_project)
-
-
-### Workshop: Maximizing Confidence in Your Data Model Changes with dbt and PipeRider
-
-
-[More details](cohorts/2023/workshops/piperider.md)
+[More details](projects)
 
 ## Overview
 
-### Architecture diagram
-<img src="images/architecture/arch_2.png"/>
 
-### Technologies
-* *Google Cloud Platform (GCP)*: Cloud-based auto-scaling platform by Google
-  * *Google Cloud Storage (GCS)*: Data Lake
-  * *BigQuery*: Data Warehouse
-* *Terraform*: Infrastructure-as-Code (IaC)
-* *Docker*: Containerization
-* *SQL*: Data Analysis & Exploration
-* *Prefect*: Workflow Orchestration
-* *dbt*: Data Transformation
-* *Spark*: Distributed Processing
-* *Kafka*: Streaming
+<img src="images/architecture/photo1700757552.jpeg" />
 
 
 ### Prerequisites
@@ -178,42 +159,62 @@ Prior experience with data engineering is not required.
 ## Instructors
 
 - [Ankush Khanna](https://linkedin.com/in/ankushkhanna2)
-- [Sejal Vaidya](https://linkedin.com/in/vaidyasejal)
 - [Victoria Perez Mola](https://www.linkedin.com/in/victoriaperezmola/)
-- [Kalise Richmond](https://www.linkedin.com/in/kaliserichmond/)
-- [Jeff Hale](https://www.linkedin.com/in/-jeffhale/)
 - [Alexey Grigorev](https://linkedin.com/in/agrigorev)
+- [Matt Palmer](https://www.linkedin.com/in/matt-palmer/)
+- [Luis Oliveira](https://www.linkedin.com/in/lgsoliveira/)
+- [Michael Shoemaker](https://www.linkedin.com/in/michaelshoemaker1/)
 
-## Tools
+Past instructors:
 
-For this course, you'll need to have the following software installed on your computer:
+- [Sejal Vaidya](https://www.linkedin.com/in/vaidyasejal/)
+- [Irem Erturk](https://www.linkedin.com/in/iremerturk/)
 
-* Docker and Docker-Compose
-* Python 3 (e.g. via [Anaconda](https://www.anaconda.com/products/individual))
-* Google Cloud SDK
-* Terraform
+## Course UI
 
-See [Week 1](week_1_basics_n_setup) for more details about installing these tools
+Alternatively, you can access this course using the provided UI app, the app provides a user-friendly interface for navigating through the course material. 
 
+* Visit the following link: [DE Zoomcamp UI](https://dezoomcamp.streamlit.app/)
+
+![dezoomcamp-ui](https://github.com/DataTalksClub/data-engineering-zoomcamp/assets/66017329/4466d2bc-3728-4fca-8e9e-b1c6be30a430)
+
+
+## Asking for help in Slack
+
+The best way to get support is to use [DataTalks.Club's Slack](https://datatalks.club/slack.html). Join the [`#course-data-engineering`](https://app.slack.com/client/T01ATQK62F8/C01FABYF2RG) channel.
+
+To make discussions in Slack more organized:
+
+* Follow [these recommendations](asking-questions.md) when asking for help
+* Read the [DataTalks.Club community guidelines](https://datatalks.club/slack/guidelines.html)
 
 
 
 ## Supporters and partners
 
-Thanks to the course sponsors for making it possible to create this course
+Thanks to the course sponsors for making it possible to run this course
 
 <p align="center">
-  <a href="https://www.prefect.io/">
-    <img height="100" src="https://github.com/DataTalksClub/mlops-zoomcamp/raw/main/images/prefect.png">
+  <a href="https://mage.ai/">
+    <img height="120" src="images/mage.svg">
+  </a>
+</p>
+
+
+<p align="center">
+  <a href="https://dlthub.com/">
+    <img height="90" src="images/dlthub.png">
   </a>
 </p>
 
 <p align="center">
-  <a href="https://www.piperider.io/">
-    <img height="130" src="images/piperider.png">
+  <a href="https://risingwave.com/">
+    <img height="90" src="images/rising-wave.png">
   </a>
 </p>
-
 
 Do you want to support our course and our community? Please reach out to [alexey@datatalks.club](alexey@datatalks.club)
 
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=DataTalksClub/data-engineering-zoomcamp&type=Date)](https://star-history.com/#DataTalksClub/data-engineering-zoomcamp&Date)
